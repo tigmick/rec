@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   has_many :resumes
   has_many :jobs
+  has_one :user_job
+  has_many :reviews
 
   def client?
     role == "client"
@@ -15,6 +17,10 @@ class User < ActiveRecord::Base
 
   def candidate?
     role == "candidate"
+  end
+
+  def full_name
+    first_name+" "+last_name
   end
   
 end

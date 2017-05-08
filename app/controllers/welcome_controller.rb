@@ -16,6 +16,6 @@ class WelcomeController < ApplicationController
 
   def search_candidate
    # user_ids =  UserJob.all.select{|j| (j.job_ids & current_user.jobs.map(&:id)).any?}.map(&:user_id).uniq
-   @users =  User.where("first_name LIKE ? AND role = ?","#{params[:search_candidate]}%", "candidate")
+   @users =  User.where("lower(first_name) LIKE ? AND role = ? AND lower(current_location) LIKE ? AND lower(salary_expectation) LIKE ?","#{params[:search_candidate].downcase}%", "candidate", "#{params[:location_search].downcase}%", "#{params[:salary_aearch].downcase}%")
   end
 end

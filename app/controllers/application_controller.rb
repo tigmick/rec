@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     if resource.email == "tigmicheal@yahoo.co.uk"
       admin_dashboard_path
+    elsif resource.class.name == "AdminUser"
+      admin_dashboard_path
     elsif resource.candidate?
       resource.sign_in_count < 2 ? edit_user_registration_path : users_dashboard_path
     else  
